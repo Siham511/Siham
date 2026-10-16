@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>متجر سهام - نظام تلقائي</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="header">🌸 سهام - الطلبات التلقائية من فيس وواتس 🌸</div>
+<div class="topbar">
+<span id="autoStatus">🔴 غير مربوط - ضعي رابط orders.json</span> |
+<a id="fbLinkTop" href="#" target="_blank">📘 فيسبوك</a> |
+<a id="waLinkTop" href="#" target="_blank">💬 واتساب</a>
+</div>
+
+<div class="tabs">
+<button class="tab active" onclick="showTab('fborders',this)">طلبات فيس/واتس تلقائي 🔴</button>
+<button class="tab" onclick="showTab('pos',this)">بيع باركود</button>
+<button class="tab" onclick="showTab('store',this)">المخزن</button>
+<button class="tab" onclick="showTab('marketers',this)">المسوقين</button>
+<button class="tab" onclick="showTab('online',this)">المتجر</button>
+<button class="tab" onclick="showTab('profits',this)">الأرباح</button>
+<a href="contact.html" class="tab" style="background:#fff0f6; color:#d81b60; text-decoration:none;">📞 اتصل بنا</a>
+</div>
+
+<div id="fborders" class="page active">
+<div class="card" style="border:2px solid #2e7d32">
+<h3>⚙️ إعداد الربط التلقائي</h3>
+<input id="webhookUrl" placeholder="حطي هنا رابط https://موقعك.com/orders.json">
+<button class="btn btn2" onclick="saveWebhook()">حفظ وربط التلقائي</button>
+<p style="font-size:11px">بعد الربط أي رسالة في فيسبوك او واتساب بتظهر هنا براها كل 5 ثواني مع صوت</p>
+</div>
+<div class="card">
+<h3>📩 الطلبات الواردة تلقائيا</h3>
+<div id="fbOrdersList">لا يوجد طلبات بعد...</div>
+</div>
+</div>
+
+<div id="pos" class="page">
+<div class="card">
+<h3>📷 نقطة البيع بالباركود</h3>
+<input id="barcodeInput" placeholder="امسح الباركود + Enter" onkeypress="if(event.key==='Enter')sellByBarcode()">
+<select id="marketerSelectPos"></select>
+<button class="btn btn2" onclick="sellByBarcode()">✅ بيع</button>
+<div id="lastSale"></div>
+</div>
+<div class="card"><div id="salesList"></div></div>
+</div>
+
+<div id="store" class="page">
+<div class="card">
+<h3>إضافة بضاعة</h3>
+<input id="pBarcode" placeholder="باركود">
+<input id="pName" placeholder="اسم المنتج">
+<input id="pCost" type="number" placeholder="سعر الشراء">
+<input id="pSell" type="number" placeholder="سعر البيع">
+<input id="pQty" type="number" placeholder="الكمية">
+<button class="btn" onclick="addProduct()">حفظ</button>
+</div>
+<div id="productTable"></div>
+</div>
+
+<div id="marketers" class="page">
+<div class="card">
+<h3>إضافة مسوق</h3>
+<input id="mName" placeholder="اسم المسوق">
+<input id="mPhone" placeholder="واتساب المسوق">
+<input id="mAcc" placeholder="حساب بنكك">
+<input id="mComm" type="number" placeholder="عمولة %">
+<button class="btn" onclick="addMarketer()">حفظ المسوق</button>
+</div>
+<div id="marketerTable"></div>
+</div>
+
+<div id="online" class="page"><div id="onlineProducts"></div></div>
+
+<div id="profits" class="page">
+<div class="card">
+<h3>💰 الأرباح</h3>
+<p>المبيعات: <b id="totalSales">0</b></p>
+<p>رأس المال: <b id="totalCost">0</b></p>
+<p>العمولات: <b id="totalComm">0</b></p>
+<p style="font-size:22px; color:green">الصافي: <b id="netProfit">0</b> ج</p>
+<button class="btn" style="background:#000" onclick="clearAll()">تصفير النظام</button>
+</div>
+</div>
+
+<a id="floatWa" class="float-wa" href="#" target="_blank">💬 واتساب</a>
+<a id="floatFb" class="float-fb" href="#" target="_blank">📘 ماسنجر</a>
+<audio id="notifSound" src="https://cdn.pixabay.com/download/audio/2022/03/24/audio_2a1c7a07a3.mp3"></audio>
+
+<script src="script.js"></script>
+</body>
+</html>
